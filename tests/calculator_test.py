@@ -50,8 +50,9 @@ def test_count_history():
     assert Calculator.count_history() == 2
 
 def test_get_history():
-    """ The return value of get_calc_history() is a list of the calculations """
-    # This tests that the returned list has the calculation history
+    """ The return value of get_calc_history() is a list of the calculation results from history"""
+    # This tests that the returned list has the calculation history results
+    # in order from oldest to newest
     clear_hist()
     #get_calc_history
     assert Calculator.count_history() == 0

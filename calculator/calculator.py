@@ -95,24 +95,3 @@ class Calculator:
         Calculator.add_calculation_to_history(div)
         # This uses the base class method to get the result from the object
         return div.get_result()
-
-#def main():
-# """ This is the Main function """
-# calc = Calculator()
-# leave = "a"
-# while leave not in ("x", "X"):
-#     calc.result = int(input("Enter First Number: "))
-#     num2 = int(input("Enter Second Number: "))
-#     operator = input("Enter an Operator: ")
-#     if operator == '+':
-#         answ = calc.add_number(num2)
-#     if operator == '-':
-#         answ = calc.subtract_number(num2)
-#     if operator == '*':
-#         answ = calc.multiply_numbers(num2)
-#     if operator == '/':
-#         answ = calc.divide_numbers(num2)
-#
-#     print(answ)
-#
-#     leave = input("c to continue: x to exit: ")
