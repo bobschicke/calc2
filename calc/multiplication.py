@@ -7,5 +7,8 @@ from calc.calculation import Calculation
 class Multiplication(Calculation):
     """ This is the addition class"""
     def get_result(self):
-        """ This function gets the result of the operation from the object"""
-        return self.value_a * self.value_b
+        """ This function does the calculation and returns the result """
+        result = self.values.pop(0)
+        for items in self.values:
+            result *= items
+        return result

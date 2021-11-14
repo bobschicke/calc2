@@ -4,13 +4,15 @@
 class Calculation:
     """ This is the Calculation class """
 
-    def __init__(self, value_a, value_b):
+    def __init__(self, values: tuple):
         """ This is the Calculation constructor """
-        self.value_a = value_a
-        self.value_b = value_b
+        self.values = Calculation.convert_vals_to_list(values)
 
     # Class Factory Method
-    @classmethod
-    def instantiate(cls, value_a, value_b):
-        """ This instantiates an object """
-        return  cls(value_a, value_b)
+    @staticmethod
+    def convert_vals_to_list(values):
+        """ This converts values to a list of floats """
+        float_list = []
+        for items in values:
+            float_list.append(float(items))
+        return float_list
