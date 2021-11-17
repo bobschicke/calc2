@@ -1,7 +1,7 @@
 # Calculator Project Setup
-[![Build Status](https://app.travis-ci.com/bobschicke/calc2.svg?branch=calc_part_2)](https://app.travis-ci.com/bobschicke/calc2)
+[![Build Status](https://app.travis-ci.com/bobschicke/calc2.svg?branch=calc_refactor)](https://app.travis-ci.com/bobschicke/calc2)
 
-This branch is Calc_Part_2
+This branch is calc_refactor
 
 Run Pip Install
 pip install -r requirements.txt

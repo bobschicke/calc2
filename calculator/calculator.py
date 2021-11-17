@@ -9,8 +9,6 @@ from calc.division import Division
 class Calculator:
     """ This is the Calculator class"""
 
-    # calc history will save calculation objects
-
     @staticmethod
     def add(values):
         """ adds 2 numbers and save them to calc_history list """
@@ -39,8 +37,6 @@ class Calculator:
     @staticmethod
     def divide(values):
         """ divides the first value by the list of values and save them to calc_history list """
-        #if value_b == 0:
-        #    return "DivBy0"
         # This instantiates a Division object which passes value_a and value_b to the constructor
         div = Division(values)
         # This uses the base class method to get the result from the object
