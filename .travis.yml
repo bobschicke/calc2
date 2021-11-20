@@ -9,4 +9,4 @@ script:
 
 branches:
   only:
-    - calc_refactor
+    - calc_csv

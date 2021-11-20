@@ -1,5 +1,5 @@
 # Calculator Project Setup
-[![Build Status](https://app.travis-ci.com/bobschicke/calc2.svg?branch=calc_refactor)](https://app.travis-ci.com/bobschicke/calc2)
+[![Build Status](https://app.travis-ci.com/bobschicke/calc2.svg?branch=calc_csv)](https://app.travis-ci.com/bobschicke/calc2)
 
 This branch is calc_refactor
 
