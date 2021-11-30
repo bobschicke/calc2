@@ -12,7 +12,7 @@ class Calculator:
     @staticmethod
     def add(values):
         """ adds 2 numbers and save them to calc_history list """
-        # This instantiates an addition object which passes value_a and value_b to the constructor
+        # This passes value_a and value_b to the Addition constructor which instantiates an object
         add = Addition(values)
         # This uses the base class method to get the result from the object
         return add.get_result()
