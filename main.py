@@ -11,10 +11,6 @@ def getFilename(filestr : str):
     return filename
 
 
-
-
-
-
 if __name__ == "__main__":
     patterns = ["*"]
     ignore_patterns = None
@@ -31,11 +27,14 @@ if __name__ == "__main__":
         if "csv" in event.src_path:
             print(event.src_path + " is CSV")
             fh = Filehandler() # Create a Filehandler object
-            fh.test_pandas(event.src_path) # Run test on file
-            # Move file to "done" folder
+            nump_arr = fh.read_csv(event.src_path) # Run test on file
+            # Get the filename
             filename = getFilename(event.src_path)
+            # Process the array
+            fh.process_csv(nump_arr, filename)
+            # Move file to "done" folder
             os.rename(filename, "done/" + filename)  # os.rename('old_directory/test_file.txt', 'new_directory/test_file.txt')
-
+            # Create/Append to the log file
 
 
     def on_deleted(event):
