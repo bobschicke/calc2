@@ -1,7 +1,6 @@
 """ This is our base class : Calculation """
 # This is an abstract class
 # This is where we create our objects
-import math
 
 class Calculation:
     """ This is the Calculation class """
@@ -16,7 +15,7 @@ class Calculation:
         """ This converts values to a list of floats """
         float_list = []
         for item in values:
-            if type(item) == str:
+            if isinstance(item,str):
                 float_list.append("nan")
             else:
                 float_list.append(float(item))

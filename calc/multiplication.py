@@ -2,7 +2,6 @@
 # This class inherits value_a and value_b from Calculation class
 # Namespace
 from calc.calculation import Calculation
-import math
 
 # Putting a Class in the parenthasis is how you extend a class
 class Multiplication(Calculation):
@@ -10,8 +9,9 @@ class Multiplication(Calculation):
     def get_result(self):
         """ This function does the calculation and returns the result """
         result = self.values.pop(0)
+        #loop through values and do the Multiplication
         for item in self.values:
-            if type(item) == str:
+            if isinstance(item,str):
                 return "nan"
             result *= item
         return result

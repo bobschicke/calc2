@@ -2,7 +2,6 @@
 # This class inherits value_a and value_b from Calculation class
 # Namespace
 from calc.calculation import Calculation
-import math
 
 # Putting a Class in the parenthasis is how you extend a class
 class Subtraction(Calculation):
@@ -10,8 +9,9 @@ class Subtraction(Calculation):
     def get_result(self):
         """ This function does the calculation and returns the result """
         result = self.values.pop(0)
-        for item in self.values:
-            if type(item) == str:
+        #loop through values and do the Subtraction
+        for vals in self.values:
+            if isinstance(vals,str):
                 return "nan"
-            result -= item
+            result -= vals
         return result

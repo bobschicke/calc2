@@ -1,71 +1,72 @@
+"""This is the Main Method"""
 import time
 import os
 from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
-from csv_util.pandas_csv_test import Filehandler
+from csv_util.file_utils import Filehandler
 
 
-def getFilename(filestr : str):
+def get_filename(filestr : str):
+    """This method gets the filename from path/filename"""
     last = filestr.rfind("/") # reverse find gets the last occurrence of the "/" char
-    filename = filestr[last + 1: len(filestr)]
-    return filename
+    file_name = filestr[last + 1: len(filestr)]
+    return file_name
 
 
 if __name__ == "__main__":
-    patterns = ["*"]
-    ignore_patterns = None
-    ignore_directories = False
-    case_sensitive = True
-    my_event_handler = PatternMatchingEventHandler(patterns, ignore_patterns, ignore_directories, case_sensitive)
+    PATTERNS = ["*"]
+    IGNORE_PATTERNS = None
+    IGNORE_DIRECTORIES = False
+    CASE_SENSITIVE = True
+    my_event_handler = PatternMatchingEventHandler(PATTERNS, IGNORE_PATTERNS,
+                                                   IGNORE_DIRECTORIES, CASE_SENSITIVE)
 
-    absolute_path = os.path.abspath(__file__)
-    print("Full path: " + absolute_path)
-    print("Directory Path: " + os.path.dirname(absolute_path))
+    absolute_file_path = os.path.abspath(__file__)
+    absolute_dir_path = os.path.dirname(absolute_file_path)
+    print("Full path: " + absolute_file_path)
+    print("Directory Path: " + absolute_dir_path)
 
     def on_created(event):
-        print(f"hey," + event.src_path + "has been created!")
+        """This is the file created interrupt"""
+        print("hey," + event.src_path + "has been created!")
         if "csv" in event.src_path:
             print(event.src_path + " is CSV")
-            fh = Filehandler() # Create a Filehandler object
-            nump_arr = fh.read_csv(event.src_path) # Run test on file
+            nump_arr = Filehandler.read_csv(event.src_path) # Run test on file
             # Get the filename
-            filename = getFilename(event.src_path)
+            csv_filename = get_filename(event.src_path)
             # Process the array
-            fh.process_csv(nump_arr, filename)
+            Filehandler.process_csv(nump_arr, csv_filename)
             # Move file to "done" folder
-            os.rename(filename, "done/" + filename)  # os.rename('old_directory/test_file.txt', 'new_directory/test_file.txt')
+            # os.rename('old_dir/file', 'new_dir/file')
+            os.rename(event.src_path, absolute_dir_path + "/done/" + csv_filename)
             # Create/Append to the log file
 
 
-    def on_deleted(event):
-        print(f"what the f**k! Someone deleted " + event.src_path)
-
-    def on_modified(event):
-        print(f"hey buddy, {event.src_path} has been modified")
-
-    def on_moved(event):
-        print(f"ok ok ok, someone moved {event.src_path} to {event.dest_path}")
+    # def on_deleted(event):
+    #     print(f"what the f**k! Someone deleted " + event.src_path)
+    # def on_modified(event):
+    #     print(f"hey buddy, {event.src_path} has been modified")
+    # def on_moved(event):
+    #     print(f"ok ok ok, someone moved {event.src_path} to {event.dest_path}")
 
     my_event_handler.on_created = on_created
+    # my_event_handler.on_deleted = on_deleted
+    # my_event_handler.on_modified = on_modified
+    # my_event_handler.on_moved = on_moved
 
-    my_event_handler.on_deleted = on_deleted
-
-    my_event_handler.on_modified = on_modified
-
-    my_event_handler.on_moved = on_moved
-
-    path = "/home/myuser/"    #"."
-    print("path = " + path)
-    go_recursively = True
+    WATCH_PATH = absolute_dir_path #+ "/input/"
+    print("path = " + WATCH_PATH)
+    GO_RECURSIVELY = True
     my_observer = Observer()
-    my_observer.schedule(my_event_handler, path, recursive=go_recursively)
+    my_observer.schedule(my_event_handler, WATCH_PATH, recursive=GO_RECURSIVELY)
 
     my_observer.start()
-
+    INDEX = 0
     try:
         while True:
-            time.sleep(5)
-            print("sleep")
+            time.sleep(15)
+            print("Waiting " + str(INDEX))
+            INDEX += 1
     except KeyboardInterrupt:
         my_observer.stop()
         my_observer.join()
