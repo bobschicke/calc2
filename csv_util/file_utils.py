@@ -45,6 +45,7 @@ class Filehandler:
         if isinstance(result, str):
             print("error = " + result)
         Filehandler.create_calc_log(rec_num, time.time(), filename, calc_type, result)
+        return result
 
     @staticmethod
     def process_csv(nump_arr, filename : str):
@@ -52,13 +53,13 @@ class Filehandler:
         rows, columns = nump_arr.shape
 
         for row in range(rows):
-            Filehandler.do_calcs((row * 4)+0, nump_arr[row][1:columns],
+            Filehandler.do_calcs((row * 4)+0, nump_arr[row],
                                  Calculator.add, "Addition", filename)
-            Filehandler.do_calcs((row * 4)+1, nump_arr[row][1:columns],
+            Filehandler.do_calcs((row * 4)+1, nump_arr[row],
                                  Calculator.subtract, "Subtraction", filename)
-            Filehandler.do_calcs((row * 4)+2, nump_arr[row][1:columns],
+            Filehandler.do_calcs((row * 4)+2, nump_arr[row],
                                  Calculator.multiply, "Multiplication", filename)
-            Filehandler.do_calcs((row * 4)+3, nump_arr[row][1:columns],
+            Filehandler.do_calcs((row * 4)+3, nump_arr[row],
                                  Calculator.divide, "Division", filename)
         print("calc_log:")
         print(Filehandler.calc_log)
