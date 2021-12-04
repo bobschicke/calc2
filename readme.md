@@ -1,7 +1,7 @@
-# Calculator Project Setup
+# Calculator Project CSV and Watchdog Observer Implementation
 [![Build Status](https://app.travis-ci.com/bobschicke/calc2.svg?branch=calc_csv)](https://app.travis-ci.com/bobschicke/calc2)
 
-This branch is calc_refactor
+This branch is calc_csv
 
 Run Pip Install
 pip install -r requirements.txt

@@ -9,6 +9,7 @@ class Filehandler:
     """This is the Filehandler Class"""
 
     calc_log = np.array([])
+    error_log = np.array([])
 
     @staticmethod
     def get_root_path():
@@ -39,11 +40,21 @@ class Filehandler:
             Filehandler.calc_log = np.vstack([Filehandler.calc_log, temp_array])
 
     @staticmethod
+    def create_error_log(rec_num, utime, filename, operation, result):
+        """This is a method to collect log info in a numpy array"""
+        temp_array = np.array([rec_num, utime, filename, operation, result])
+        if len(Filehandler.error_log) == 0:
+            Filehandler.error_log = np.append(Filehandler.error_log, temp_array)
+        else:
+            Filehandler.error_log = np.vstack([Filehandler.error_log, temp_array])
+
+    @staticmethod
     def do_calcs (rec_num, row_array, func, calc_type, filename):
         """This method gets passed the function and an array and calls the calc function"""
         result = func(row_array)
         if isinstance(result, str):
             print("error = " + result)
+            Filehandler.create_error_log(rec_num, time.time(), filename, calc_type, result)
         Filehandler.create_calc_log(rec_num, time.time(), filename, calc_type, result)
         return result
 
@@ -51,7 +62,7 @@ class Filehandler:
     def process_csv(nump_arr, filename : str):
         """This method iterates through the array and calls the calc functions"""
         rows, columns = nump_arr.shape
-
+        print("Rows = " + str(rows) + ", Columns = " + str(columns))
         for row in range(rows):
             Filehandler.do_calcs((row * 4)+0, nump_arr[row],
                                  Calculator.add, "Addition", filename)
